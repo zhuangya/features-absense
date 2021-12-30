@@ -1,18 +1,15 @@
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 <script>
 (function () {
-    var pps = _.reduce(Modernizr, function (props, m, k) {
-        if (!m) {
-            props.push(k);
-        }
-        return props;
-    }, []);
-    var result = {
-        'href': window.location.href,
-        'fb': pps
-    };
-    document.write(JSON.stringify(result));
+  const pps = Object.keys(Modernizr).reduce((props, k) => {
+    const m = Modernizr[k];
+    return m ? props : [...props, k];
+  }, []);
+
+  const result = {
+    'href': window.location.href,
+    'fb': pps
+  };
+  document.write(`<pre>${JSON.stringify(result, null, 2)}</pre>`);
 }());
 </script>
